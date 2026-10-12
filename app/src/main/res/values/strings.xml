@@ -1,0 +1,11 @@
+<resources>
+    <string name="widget_description">Ajouter des kcal ou un poids · 4 × 2</string>
+    <string name="widget_calories">Calories</string>
+    <string name="widget_weight">Poids</string>
+    <string name="widget_add_calories">Ajouter des calories ingérées</string>
+    <string name="widget_add_weight">Ajouter une mesure de poids</string>
+    <string name="app_name" translatable="false">Kcalcul</string>
+    <string name="widget_plus" translatable="false">+</string>
+    <string name="unit_kcal" translatable="false">kcal</string>
+    <string name="unit_kg" translatable="false">kg</string>
+</resources>

@@ -2,7 +2,7 @@
 
 Application Android native, en français, conçue pour suivre uniquement les calories ingérées et le poids. Android 8.0 ou version ultérieure. Aucune permission réseau, aucun compte, aucune publicité.
 
-La version actuelle est **1.14**. Le header reste fixe pendant le défilement. Le compteur de kcal utilise une jauge circulaire, avec le nombre légèrement remonté. Tous les aperçus sont actualisés dans `artifacts/previews/`.
+La version actuelle est **1.16**. Le header reste fixe pendant le défilement. Le compteur de kcal utilise une jauge circulaire, avec le nombre légèrement remonté. Tous les aperçus sont actualisés dans `artifacts/previews/`.
 
 La création du profil affiche seulement les champs à renseigner et la validation. Le bloc de formule a également été retiré du profil.
 
@@ -71,3 +71,11 @@ Android Studio configure `local.properties` pour le chemin du SDK. L’APK produ
 Les tests vérifient la formule, les nombres décimaux français, les limites de journée, les poids historiques, la persistance après réouverture de SQLite, l’édition et la suppression, le rollback du profil en cas d’échec, le parcours de première saisie sur les API 26 et 36 et la conservation d’une saisie lors d’une rotation. Le [moteur de test Android 16 demande Java 21](https://robolectric.org/compatibility_table/). Les images dans `artifacts/previews/` sont rendues à partir des vues Android avec Robolectric ; les données de démonstration sont uniquement dans les tests et ne sont jamais préchargées dans l’application. Ces vérifications ne remplacent pas un essai sur un téléphone physique.
 
 Le code de l’application utilise exclusivement le SDK Android. JUnit et Robolectric sont des dépendances de test uniquement.
+
+## Widget Android 4 × 2
+
+Appui long sur l’écran d’accueil du téléphone → **Widgets** → **Kcalcul**, puis déposer le widget. Deux boutons ouvrent directement la saisie des **Calories** ou du **Poids**, avec la date du jour et l’heure actuelle modifiables. La validation utilise le même stockage local que l’app. Si le profil n’est pas encore renseigné, sa création précède la saisie demandée.
+
+La taille cible est de **4 colonnes × 2 lignes**, sans redimensionnement. Les dimensions réelles dépendent de la grille du lanceur Android ; les versions antérieures à Android 12 utilisent les dimensions minimales. [Documentation Android sur les dimensions des widgets](https://developer.android.com/develop/ui/views/appwidgets/layouts).
+
+L’aperçu `artifacts/previews/widget.png` est rendu depuis les RemoteViews Android, sur une surface représentative de 320 × 160 dp.

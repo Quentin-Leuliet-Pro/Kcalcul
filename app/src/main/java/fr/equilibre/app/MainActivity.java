@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -49,6 +50,7 @@ public final class MainActivity extends Activity {
     private Dialog editor;
     private EditText editorAmount;
     private String editorKind;
+    private String pendingWidgetEntry;
     private long editorId;
     private LocalDateTime[] editorTime;
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -71,7 +73,10 @@ public final class MainActivity extends Activity {
                 if(profile!=null && HealthMath.hasKnownGender(profile.gender) && !page.equals("journal")) {page="journal";render();} else finish();
             });
         }
+        pendingWidgetEntry=state==null?widgetKind(getIntent()):state.getString("pendingWidgetEntry");
+        setIntent(new Intent(getIntent()).setAction(null));
         render();
+        openPendingWidgetEntry();
         if(state!=null && state.containsKey("editorKind") && profile!=null && HealthMath.hasKnownGender(profile.gender)) {
             String kind=state.getString("editorKind"); long id=state.getLong("editorId",-1);
             Entry entry=null; for(Entry e:entries) if(e.id==id) entry=e;
@@ -84,7 +89,31 @@ public final class MainActivity extends Activity {
         }
     }
 
+    @Override protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(new Intent(intent).setAction(null));
+        String kind=widgetKind(intent);
+        if(kind==null) return;
+        if(editor!=null) editor.dismiss();
+        pendingWidgetEntry=kind;
+        page="journal"; day=LocalDate.now(); render();
+        openPendingWidgetEntry();
+    }
+
+    private static String widgetKind(Intent intent) {
+        if(KcalculWidget.ADD_CALORIES.equals(intent.getAction())) return "calories";
+        if(KcalculWidget.ADD_WEIGHT.equals(intent.getAction())) return "weight";
+        return null;
+    }
+
+    private void openPendingWidgetEntry() {
+        if(pendingWidgetEntry==null || profile==null || !HealthMath.hasKnownGender(profile.gender)) return;
+        String kind=pendingWidgetEntry; pendingWidgetEntry=null;
+        day=LocalDate.now(); page="journal"; render(); showEntry(kind,null);
+    }
+
     @Override protected void onSaveInstanceState(Bundle state) {
+        state.putString("pendingWidgetEntry",pendingWidgetEntry);
         state.putString("day",day.toString()); state.putString("page",page); state.putInt("range",range);
         if(ageField!=null && (profile==null || page.equals("profile"))) {
             state.putString("gender",gender); state.putString("age",ageField.getText().toString());
@@ -386,7 +415,7 @@ public final class MainActivity extends Activity {
         if(age==null || height==null || weight==null) return;
         try {
             store.saveProfile(new Profile(gender,age,height,weight,activityLevel),LocalDateTime.now());
-            hideKeyboard(); page="journal"; day=LocalDate.now(); render();
+            hideKeyboard(); page="journal"; day=LocalDate.now(); render(); openPendingWidgetEntry();
         } catch(RuntimeException error) { new AlertDialog.Builder(this).setMessage("Impossible d’enregistrer le profil. Réessayez.").setPositiveButton("OK",null).show(); }
     }
 

@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="12dp"
+    android:background="@drawable/widget_background">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="28dp"
+        android:orientation="horizontal" android:baselineAligned="false" android:gravity="center_vertical">
+        <ImageView android:layout_width="28dp" android:layout_height="28dp"
+            android:src="@drawable/ic_launcher" android:contentDescription="@null" />
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:layout_marginStart="10dp"
+            android:text="@string/app_name" android:textSize="18sp" android:textStyle="bold"
+            android:textColor="#EDF4FA" android:fontFamily="sans-serif" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:layout_marginTop="6dp" android:orientation="horizontal" android:baselineAligned="false">
+        <LinearLayout android:id="@+id/widget_add_calories"
+            android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+            android:orientation="horizontal" android:baselineAligned="false" android:gravity="center" android:padding="8dp"
+            android:background="@drawable/widget_calories" android:contentDescription="@string/widget_add_calories">
+            <TextView android:layout_width="28dp" android:layout_height="wrap_content"
+                android:text="@string/widget_plus" android:textColor="#65E2FF" android:textSize="28sp" android:fontFamily="sans-serif-light" />
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginStart="6dp" android:orientation="vertical" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="@string/widget_calories" android:textColor="#EDF4FA" android:textSize="16sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp" android:text="@string/unit_kcal" android:textColor="#65E2FF" android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:id="@+id/widget_add_weight"
+            android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+            android:layout_marginStart="12dp" android:orientation="horizontal" android:baselineAligned="false" android:gravity="center" android:padding="8dp"
+            android:background="@drawable/widget_weight" android:contentDescription="@string/widget_add_weight">
+            <TextView android:layout_width="28dp" android:layout_height="wrap_content"
+                android:text="@string/widget_plus" android:textColor="#9B9BFF" android:textSize="28sp" android:fontFamily="sans-serif-light" />
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginStart="6dp" android:orientation="vertical" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="@string/widget_weight" android:textColor="#EDF4FA" android:textSize="16sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp" android:text="@string/unit_kg" android:textColor="#9B9BFF" android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
