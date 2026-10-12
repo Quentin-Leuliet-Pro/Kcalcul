@@ -1,0 +1,17 @@
+<resources>
+    <item name="age_input" type="id" />
+    <item name="height_input" type="id" />
+    <item name="weight_input" type="id" />
+    <item name="save_profile" type="id" />
+    <item name="add_calories" type="id" />
+    <item name="add_weight" type="id" />
+    <item name="entry_value" type="id" />
+    <item name="entry_save" type="id" />
+    <item name="activity_choice" type="id" />
+    <item name="profile_button" type="id" />
+    <item name="calorie_balance" type="id" />
+    <item name="nav_journal" type="id" />
+    <item name="nav_evolution" type="id" />
+    <item name="daily_fat_estimate" type="id" />
+    <item name="accumulated_fat_estimate" type="id" />
+</resources>
